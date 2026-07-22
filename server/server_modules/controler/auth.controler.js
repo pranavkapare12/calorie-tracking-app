@@ -2,6 +2,8 @@ import { hashPassword,compareHash } from "../Functions/crypto.functions.js";
 import { compareSync } from "bcrypt";
 import { generateToken } from "../Functions/token.function.js";
 import cookieParser from "cookie-parser";
+import connection from "../database_connection/Pg.database_connection.js";
+
 const loging = (req, res) => {
     const { email, password } = req.body;
    
