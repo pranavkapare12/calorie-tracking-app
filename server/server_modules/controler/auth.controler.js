@@ -4,8 +4,11 @@ import { generateToken } from "../Functions/token.function.js";
 import cookieParser from "cookie-parser";
 import prism from "../database_connection/Pg.database_connection.js";
 
-const loging = (req, res) => {
+const loging = async (req, res) => {
     const { email, password } = req.body;
+
+    const data = await prism.users.findMany();
+    console.log(data)
        
     // let getCookie = generateToken(userDbResult._id);
     // const userData = {
