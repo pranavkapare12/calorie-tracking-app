@@ -2,11 +2,11 @@ import { hashPassword,compareHash } from "../Functions/crypto.functions.js";
 import { compareSync } from "bcrypt";
 import { generateToken } from "../Functions/token.function.js";
 import cookieParser from "cookie-parser";
-import connection from "../database_connection/Pg.database_connection.js";
+import prism from "../database_connection/Pg.database_connection.js";
 
 const loging = (req, res) => {
     const { email, password } = req.body;
-   
+       
     // let getCookie = generateToken(userDbResult._id);
     // const userData = {
     //     _id: userDbResult._id,
