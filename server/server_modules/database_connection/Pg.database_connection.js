@@ -1,3 +1,5 @@
-const prism = "Hello world from the database connection file";
+import  { PrismaClient } from "@prisma/client";
+
+const prism = new PrismaClient();
 
 export default prism;
