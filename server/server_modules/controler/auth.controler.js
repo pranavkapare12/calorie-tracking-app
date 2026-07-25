@@ -7,7 +7,11 @@ import prism from "../database_connection/Pg.database_connection.js";
 const loging = async (req, res) => {
     const { email, password } = req.body;
 
-    const data = await prism.users.findMany();
+    const data = await prism.users.findFirst({
+        where:{
+            email: email
+        }
+    })
     console.log(data)
        
     // let getCookie = generateToken(userDbResult._id);
@@ -31,45 +35,39 @@ const loging = async (req, res) => {
     return res.status(201).json({"message":"All Is Working Correctly"})
 }
 
-const signup = (req, res) => {
-    const { username, email, password, type } = req.body;
-    // let conn = mongoDb();
-    // let ack = await User.findOne({
-    //     email: email
-    // })
+const signup =async (req, res) => {
+    const user = req.body;
 
-    // if (ack) {
-    //     return res.status(409).json({
-    //         message: "USER ALREADY EXIST"
-    //     })
-    // }
-    // let hash = await hashPassword(password);
+    let ack = await prism.users.findFirst({
+        where: {
+            email: user.email
+        }
+    })
 
-    // let result = await User.create({
-    //     username: username,
-    //     email: email,
-    //     password: hash,
-    //     type: type
-    // })
+    if (ack) {
+        console.log(ack)
+        return res.status(409).json({
+            message: "USER ALREADY EXIST"
+        })
+    }
 
+    let hash = await hashPassword(user.password);
+    user.password = hash;
 
-    // let getToken = generateToken(result._id);
-    // const userData = {
-    //     _id: result._id,
-    //     username: result.username,
-    //     email: result.email,
-    //     type: result.type,
-    //     createAt: result.createdAt
-    // }
-    // res.cookie('Grocery_User', getToken, {
-    //     httpOnly: true,
-    //     secure: true,
-    //     sameSite: "none",
-    //     path: "/",
-    //     maxAge: 7 * 24 * 60 * 60 * 1000
-    // });
+    let result = await prism.users.create({
+        data: user
+    })
 
-    return res.status(201).json({"message":"Sign Up is Working Correctly"});
+    if (!result) {
+        return res.status(500).json({
+            message: "SOMETHING WENT WRONG"
+        })
+    }
+    
+    return res.status(201).json({
+        "message":"Sign Up is Working Correctly",
+        "data": result
+    });
 }
 
 const logout = (req, res) => {
