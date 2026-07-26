@@ -12,27 +12,26 @@ const loging = async (req, res) => {
             email: email
         }
     })
-    console.log(data)
-       
-    // let getCookie = generateToken(userDbResult._id);
-    // const userData = {
-    //     _id: userDbResult._id,
-    //     username: userDbResult.username,
-    //     email: userDbResult.email,
-    //     type: userDbResult.type,
-    //     createAt: userDbResult.createdAt
-    // }
-    // res.cookie('Grocery_User', getCookie, {
-    //     httpOnly: true,
-    //     secure: true,
-    //     sameSite: "none",
-    //     path: "/",
-    //     maxAge: 7 * 24 * 60 * 60 * 1000
-    // })
-    // let userDate = "Hello From the user"
 
-    // req.userData = userData;
-    return res.status(201).json({"message":"All Is Working Correctly"})
+    if (!data){
+        return res.status(404).json({
+            "message":"Invalid Email or Password"
+        })
+    }
+    let comparePassword = await compareHash(password,data.password)
+
+    if (!comparePassword){
+        return res.status(404).json({
+            "message":"Invalid Email or Password"
+        })
+    }  
+    data.password = undefined;
+    return res.status(200).json(
+        {
+            "message":"Successfull Login",
+            data
+        }
+    )
 }
 
 const signup =async (req, res) => {
