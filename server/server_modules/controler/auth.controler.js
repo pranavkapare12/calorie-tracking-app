@@ -63,9 +63,10 @@ const signup =async (req, res) => {
             message: "SOMETHING WENT WRONG"
         })
     }
-    
+    result.password = undefined;
+
     return res.status(201).json({
-        "message":"Sign Up is Working Correctly",
+        "message":"USER CREATE SUCCESSFULLY",
         "data": result
     });
 }
