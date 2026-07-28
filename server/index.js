@@ -1,6 +1,7 @@
 import express from 'express'
 import { config } from 'dotenv';
 import auth_route from './server_modules/routes/auth.routes.js';
+import goal_route from "./server_modules/routes/goal.routes.js"
 import cors from "cors"
 
 config()
@@ -19,6 +20,7 @@ app.get('/',(req,res)=>{
 })
 
 app.use("/api/auth",auth_route)
+app.use("/api/goal",goal_route)
 
 app.listen(3000,()=>{
     console.log("THE SERVER IS RUNNING ON 3000 PORT")
