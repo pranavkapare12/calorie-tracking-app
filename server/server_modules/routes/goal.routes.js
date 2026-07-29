@@ -1,4 +1,5 @@
 import Router from "express"
+import { setGoal } from "../controler/goal.contoler.js";
 const goatRoute = Router();
 
 goatRoute.get("/hello",(req,res)=>{
@@ -7,4 +8,5 @@ goatRoute.get("/hello",(req,res)=>{
     })
 })
 
+goatRoute.post("/setgoal",setGoal)
 export default goatRoute;
