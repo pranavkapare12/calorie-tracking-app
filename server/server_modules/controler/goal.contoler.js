@@ -1,6 +1,46 @@
-const setGoal = async(req,res) =>{
+const setGoal = async (req, res) => {
+    const {
+        user_id,
+        date_of_birth,
+        height_in_cm,
+        current_weight_kg,
+        target_weight_kg,
+        weakily_goals,
+        activity_level,
+        gender
+    } = req.body;
+
+    let userData = req.body;
+    
+    // CALCULATE BMI (Body MASS INDEX) of User
+    let bmi = (current_weight_kg / (height_in_cm * height_in_cm) * 10000)
+    userData.bmi =Number(bmi.toFixed(2))
+    
+    // CALCULATE AGE OF THE USER 
+    let date = new Date()
+    let ageOperation = date_of_birth.split("-")
+    let age =date.getFullYear() -  Number( ageOperation[2] )
+    if(date.getMonth() - Number( ageOperation[1]) < 0)
+        age--;
+    userData.age = age;
+
+    // CALUCULTING BMR (BASIC METABOLIC RATE) OF USRE
+    if (gender === "male"){
+        let bmr = (10 * target_weight_kg) + ( 6.25 * height_in_cm ) - ( 5 * age) + 5
+        userData.bmr = bmr
+    }
+    else if(gender === "women"){
+        let bmr = (10 * target_weight_kg) + ( 6.25 * height_in_cm ) - ( 5 * age) + 161
+        userData.bmr = bmr
+    }
+
+    console.log(userData)
+
+    
+
+
     return res.status(200).json({
-        "message":"Set Goals is working corectly"
+        "data":  userData
     })
 }
 
