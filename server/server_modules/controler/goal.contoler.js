@@ -34,6 +34,31 @@ const setGoal = async (req, res) => {
         userData.bmr = bmr
     }
 
+    let TDEE_OPP_VALUE = 0;
+    
+    switch (weakily_goals){
+        case "0":
+            TDEE_OPP_VALUE = 1.2
+            break
+        
+        case "1-3":
+            TDEE_OPP_VALUE = 1.375
+            break
+        
+        case "3-5":
+            TDEE_OPP_VALUE = 1.55
+            break;
+        
+        case "6-7":
+            TDEE_OPP_VALUE = 1.725
+            break;
+
+        case "athlet":
+            TDEE_OPP_VALUE = 1.90
+            break
+    }
+    console.log(TDEE_OPP_VALUE)
+
     console.log(userData)
 
     
