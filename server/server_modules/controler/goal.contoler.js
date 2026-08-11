@@ -24,6 +24,22 @@ function calculateTDEE(activity_level , bmr){
     return Math.round(TDEE_OPP_VALUE*bmr)
 }
 
+function calculateCalories(weakily_goals , tdee){
+    if ( weakily_goals < 0 ){
+        // console.log(Math.abs(weakily_goals))
+        let calories = Math.abs(weakily_goals) * (7700 / 7)
+        return tdee - calories
+    }
+    else if ( weakily_goals > 0 ){
+        let calories = weakily_goals * (7700 / 7)
+        return Math.round(tdee + calories)
+    }
+    else{
+        return tdee
+    }
+    
+}
+
 const setGoal = async (req, res) => {
     const {
         user_id,
@@ -60,7 +76,12 @@ const setGoal = async (req, res) => {
         userData.bmr = bmr
     }
 
-    console.log(calculateTDEE(activity_level , userData.bmr))
+    // Calulating TDEE (Total Daily Energy Expenditure) of User
+    userData.tdee = calculateTDEE(activity_level , userData.bmr)
+
+    // Calculate Calorise of User
+    userData.daily_calories = calculateCalories(weakily_goals , userData.tdee)
+
     console.log(userData)
 
     return res.status(200).json({
