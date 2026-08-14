@@ -40,4 +40,15 @@ function calculateCalories(weakily_goals , tdee){
     
 }
 
-export { calculateTDEE , calculateCalories }
+function getTarget(weight){
+    if (weight < 0){
+        return "weight_loss"
+    }else if (weight > 0){
+        return "weight_gain"
+    }
+    else{
+        return "maintain"
+    }
+}
+
+export { calculateTDEE , calculateCalories , getTarget}
