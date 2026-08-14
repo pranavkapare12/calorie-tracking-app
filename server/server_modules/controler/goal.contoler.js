@@ -11,7 +11,6 @@ const setGoal = async (req, res) => {
         activity_level,
         gender
     } = req.body;
-
     let userData = req.body;
     
     // CALCULATE BMI (Body MASS INDEX) of User
