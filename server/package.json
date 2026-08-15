@@ -19,9 +19,9 @@
     "express": "^5.2.1",
     "joi": "^18.2.3",
     "jsonwebtoken": "^9.0.3",
+    "nodemailer": "^9.0.5",
     "pg": "^8.22.0",
-    "prisma": "^6.19.3",
-    "resend": "^6.18.1"
+    "prisma": "^6.19.3"
   },
   "devDependencies": {
     "@types/pg": "^8.20.0"

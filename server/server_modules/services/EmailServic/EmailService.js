@@ -1,19 +1,28 @@
-import { Resend } from "resend";
+import nodemailer from 'nodemailer'
 
-async function sendMain(){
-    const resend = new Resend(process.env.RESEND_API_KEY)
+const transport = nodemailer.createTransport({
+    secure: true,
+    host: process.env.HOST_EMAIL,
+    port: Number(process.env.SMTP_PORT),
+    auth:{
+        user:process.env.ADMIN_EMAIL,
+        pass:process.env.ADMIN_PASS
+    }
+})
 
-    const {data} =await resend.emails.send({
-        from:'onboarding@resend.dev',
-        to:'healtcaloriestracker@gmail.com',
-        subject:'Successfully create Email Service',
-        text:'It Works !!!'
-    })
-
-    console.log(data)
-
+async function sendMail(to,subject,text){
+    try{
+        let ack = await transport.sendMail({
+            from:process.env.FROM,
+            to:to,
+            subject:subject,
+            html:text
+        })
+        console.log(ack)
+    }
+    catch(err){
+        console.log(err)
+    }
 }
 
-
-
-export { sendMain }
+export default sendMail;

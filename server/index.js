@@ -3,8 +3,7 @@ import { config } from 'dotenv';
 import auth_route from './server_modules/routes/auth.routes.js';
 import goal_route from "./server_modules/routes/goal.routes.js"
 import cors from "cors"
-import { sendMain } from './server_modules/services/EmailServic/EmailService.js';
-
+import user from './server_modules/services/EmailServic/EmailService.js';
 
 config()
 
