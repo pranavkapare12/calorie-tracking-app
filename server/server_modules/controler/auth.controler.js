@@ -3,6 +3,7 @@ import { compareSync } from "bcrypt";
 import { generateToken } from "../Functions/token.function.js";
 import cookieParser from "cookie-parser";
 import prism from "../database_connection/Pg.database_connection.js";
+import sendEmail from "../services/EmailServic/EmailService.js";
 
 const loging = async (req, res) => {
     const { email, password } = req.body;
@@ -80,4 +81,15 @@ const logout = (req, res) => {
     res.status(200).json({ message: "Cookie Clear" })
 }
 
-export { loging, logout, signup }
+const sendMail = async (req,res) =>{
+    const { email , otp } = req.body;
+    let subject = "Cal Tracker Email Verification "
+    let body = `<h4>OTP</h4> <p> Hello Uesr the otp of cal tracker ${otp} do Not share this otp</p>`
+    let ack = await sendEmail(email,subject,body)
+    if ((ack.accepted).length > 0)
+        return res.status(200).json({ "message" : "Mail Send" })
+    else if ((ack.rejected).length > 0)
+        return res.status(501).json({ "message" : "Fail to Send Mail" })
+}
+
+export { loging, logout, signup, sendMail }

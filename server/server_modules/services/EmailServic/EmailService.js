@@ -18,10 +18,10 @@ async function sendMail(to,subject,text){
             subject:subject,
             html:text
         })
-        console.log(ack)
+        return ack
     }
     catch(err){
-        console.log(err)
+        return err
     }
 }
 
