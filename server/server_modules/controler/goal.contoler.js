@@ -31,19 +31,16 @@ const setGoal = async (req, res) => {
 
         const [day, month, year] = date_of_birth.split("-");
 
-        let age = today.getFullYear() - Number(year);
+        let calender_date = today.getDate()
+        let calender_month = today.getMonth()
+        let calender_year = today.getFullYear()
 
-        const birthMonth = Number(month) - 1;
-        const birthDay = Number(day);
-
-        if (
-            today.getMonth() < birthMonth ||
-            (
-                today.getMonth() === birthMonth &&
-                today.getDate() < birthDay
-            )
-        ) {
-            age--;
+        let age = calender_year - Number(year);
+        if ((( calender_month +1) - month ) < 0)
+            age--
+        else if((( calender_month + 1) - month ) == 0){
+            if ((day -  calender_date ) > 0 )
+                age --
         }
 
         // --------------------------------
@@ -188,6 +185,8 @@ const setGoal = async (req, res) => {
 
             estimated_complete_date: new Date(),
 
+            age : age,
+
             users: {
                 connect: {
                     user_id: user_id
@@ -203,7 +202,6 @@ const setGoal = async (req, res) => {
             data: userData
         });
 
-        console.log("User Data Inserted Successfully");
 
         return res.status(201).json({
             message: "Goal created successfully",
