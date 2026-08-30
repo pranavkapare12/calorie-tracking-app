@@ -64,6 +64,7 @@ const signup =async (req, res) => {
         })
     }
     result.password = undefined;
+    result.details = {}
 
     return res.status(201).json({
         "message":"USER CREATE SUCCESSFULLY",
@@ -87,9 +88,9 @@ const sendMail = async (req,res) =>{
     let body = `<h4>OTP</h4> <p> Hello Uesr the otp of cal tracker ${otp} do Not share this otp</p>`
     let ack = await sendEmail(email,subject,body)
     if ((ack.accepted).length > 0)
-        return res.status(200).json({ "message" : "Mail Send" })
+        return res.status(200).json({ "message" : "Mail Send" , "verified" : true })
     else if ((ack.rejected).length > 0)
-        return res.status(501).json({ "message" : "Fail to Send Mail" })
+        return res.status(501).json({ "message" : "Fail to Send Mail" , "verified" : false})
 }
 
 export { loging, logout, signup, sendMail }
