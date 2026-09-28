@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import { SafeAreaProvider , useSafeAreaInsets} from "react-native-safe-area-context";
+import { SafeAreaProvider, useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function RootLayout() {
   const inset = useSafeAreaInsets()

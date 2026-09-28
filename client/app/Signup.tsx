@@ -1,13 +1,11 @@
-import { Text, View, ScrollView, Image, TextInput, Pressable } from "react-native";
 import { useRouter } from "expo-router";
-import { useWindowDimensions } from "react-native";
-import Fontisto from 'react-native-vector-icons/Fontisto';
-import Feather from 'react-native-vector-icons/Feather';
+import { useState } from "react";
+import { Platform, Pressable, ScrollView, Text, TextInput, useWindowDimensions, View } from "react-native";
+import { Checkbox } from "react-native-paper";
 import Entypo from 'react-native-vector-icons/Entypo';
+import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { Platform } from "react-native";
-import { useState } from "react"
-import { Checkbox } from "react-native-paper"
+import Fontisto from 'react-native-vector-icons/Fontisto';
 
 
 export default function Signup() {
@@ -19,31 +17,15 @@ export default function Signup() {
   const [userData, setUserData] = useState({
     name: "",
     email: "",
-    isVerified: false,
     password: "",
     conform_Password: "",
-    otp: ""
   });
-
-  function signUp() {
-    console.log(userData)
-    setUserData({
-      name: "",
-      email: "",
-      isVerified: false,
-      password: "",
-      conform_Password: "",
-      otp: ""
-    })
-  }
-
 
   return (
     <ScrollView
       contentContainerStyle={{
         flex: 1,
         alignItems: "center",
-
       }}>
 
       <View style={{ width: "100%", height: height * 0.1, justifyContent: "center", marginVertical: 5, borderRadius: 10, paddingLeft: 5 }}>
@@ -54,7 +36,7 @@ export default function Signup() {
       <View style={{ width: "100%", backgroundColor: "", marginVertical: 5, borderRadius: 10, padding: 10 }}>
 
         <Text style={{ fontWeight: "bold", fontSize: 12 }}>𝖥𝗎𝗅𝗅 𝖭𝖺𝗆𝖾</Text>
-        <View style={{ width: "100%", backgroundColor: "#57585920", flexDirection: "row", alignItems: "center", paddingHorizontal: 10, paddingVertical: 5, borderRadius: 10, marginVertical: 5, display: "flex" }}>
+        <View style={{ width: "100%", backgroundColor: "#57585920", flexDirection: "row", alignItems: "center", paddingHorizontal: 10, paddingVertical: 5, borderRadius: 10, marginVertical: 10, display: "flex" }}>
           <FontAwesome name="user" color="#000" size={20} style={{ opacity: 0.5, marginHorizontal: 10, flexBasis: "7%" }} />
           <TextInput
             placeholder="𝖥𝗎𝗅𝗅 𝖭𝖺𝗆𝖾"
@@ -66,7 +48,7 @@ export default function Signup() {
         </View>
 
         <Text style={{ fontWeight: "bold", fontSize: 12 }}>𝖤𝗆𝖺𝗂𝗅</Text>
-        <View style={{ width: "100%", backgroundColor: "#57585920", flexDirection: "row", alignItems: "center", paddingHorizontal: 10, paddingVertical: 5, borderRadius: 10, marginVertical: 5, display: "flex" }}>
+        <View style={{ width: "100%", backgroundColor: "#57585920", flexDirection: "row", alignItems: "center", paddingHorizontal: 10, paddingVertical: 5, borderRadius: 10, marginVertical: 10, display: "flex" }}>
           <Fontisto name="email" color="#000" size={20} style={{ opacity: 0.5, marginHorizontal: 10, flexBasis: "7%" }} />
           <TextInput
             placeholder="𝗒𝗈𝗎@𝖾𝗑𝖺𝗆𝗉𝗅𝖾.𝖼𝗈𝗆"
@@ -77,42 +59,9 @@ export default function Signup() {
           />
         </View>
 
-        <Text style={{ fontWeight: "bold", fontSize: 12 }}>𝖮𝖳𝖯</Text>
-        <View style={{ display: "flex", flexDirection: "row" }}>
-          <View style={{ width: "85%", backgroundColor: "#57585920", flexDirection: "row", alignItems: "center", paddingHorizontal: 20, paddingVertical: 5, borderRadius: 10, marginVertical: 5, display: "flex" }}>
-            <FontAwesome name="hashtag" color="#000" size={20} style={{ opacity: 0.5, marginHorizontal: "1%", flexBasis: "10%" }} />
-            <TextInput
-              placeholder="𝖮𝖳𝖯"
-              style={{ flexBasis: "80%" }}
-              inputMode="decimal"
-              maxLength={6}
-              value={userData.otp || ""}
-              onChangeText={(num) => setUserData({ ...userData, otp: num })}
-            />
-          </View>
-          <Pressable
-            style={({ pressed }) => [
-              {
-                backgroundColor: "#4dff00",
-                marginVertical: 9,
-                marginHorizontal: 4,
-                alignItems: "center",
-                justifyContent: "center",
-                paddingHorizontal: 5,
-                borderRadius: 10
-              },
-              pressed && {
-                transform: [{ scale: 0.9 }]
-              }
-            ]}
-          >
-            <Text style={{ fontSize: 8, color: "white" }}>Send OTP</Text>
-          </Pressable>
-        </View>
-
 
         <Text style={{ fontWeight: "bold", fontSize: 12 }}>𝖯𝖺𝗌𝗌𝗐𝗈𝗋𝖽</Text>
-        <View style={{ width: "100%", backgroundColor: "#57585920", flexDirection: "row", alignItems: "center", paddingHorizontal: 20, paddingVertical: 5, borderRadius: 10, marginVertical: 5, display: "flex" }}>
+        <View style={{ width: "100%", backgroundColor: "#57585920", flexDirection: "row", alignItems: "center", paddingHorizontal: 20, paddingVertical: 5, borderRadius: 10, marginVertical: 10, display: "flex" }}>
           <Feather name="lock" color="#000" size={20} style={{ opacity: 0.5, marginHorizontal: "1%", flexBasis: "10%" }} />
           <TextInput
             placeholder="𝖯𝖺𝗌𝗌𝗐𝗈𝗋𝖽"
@@ -133,7 +82,7 @@ export default function Signup() {
 
 
         <Text style={{ fontWeight: "bold", fontSize: 12 }}>𝖢𝗈𝗇𝖿𝗂𝗋𝗆 𝖯𝖺𝗌𝗌𝗐𝗈𝗋𝖽</Text>
-        <View style={{ width: "100%", backgroundColor: "#57585920", flexDirection: "row", alignItems: "center", paddingHorizontal: 20, paddingVertical: 5, borderRadius: 10, marginVertical: 5, display: "flex" }}>
+        <View style={{ width: "100%", backgroundColor: "#57585920", flexDirection: "row", alignItems: "center", paddingHorizontal: 20, paddingVertical: 5, borderRadius: 10, marginVertical: 10, display: "flex" }}>
           <Feather name="lock" color="#000" size={20} style={{ opacity: 0.5, marginHorizontal: "1%", flexBasis: "10%" }} />
           <TextInput placeholder="𝖢𝗈𝗇𝖿𝗂𝗋𝗆 𝖯𝖺𝗌𝗌𝗐𝗈𝗋𝖽"
             value={userData.conform_Password || ""}
@@ -151,20 +100,21 @@ export default function Signup() {
 
 
 
-      <View style={{ width: "100%", justifyContent: "center", alignItems: "center", marginVertical: 5, borderRadius: 10, paddingLeft: 5, display: "flex", flexDirection: "row", gap: 5 }}>
+      <View style={{ width: "100%", justifyContent: "center", alignItems: "center", marginBottom:10, borderRadius: 10, paddingLeft: 5, display: "flex", flexDirection: "row", gap: 5 }}>
         <Checkbox
           status={check ? "checked" : "unchecked"}
           onPress={() => setCheck(!check)}
           color="#11ff00"
         />
         <Text style={{ color: "black", marginHorizontal: 0, opacity: 0.5, fontSize: 10 }}>𝖨 𝖺𝗀𝗋𝖾𝖾 𝗍𝗈</Text>
-        <Text style={{ color: "#2efc00", marginHorizontal: 0, opacity: 0.5, fontSize: 10 }}>𝖳𝖾𝗋𝗆𝗌 & 𝖢𝗈𝗇𝖽𝗂𝗍𝗂𝗈𝗇𝗌</Text>
+        <Text style={{ color: "#003bfc", marginHorizontal: 0, opacity: 0.5, fontSize: 10 }}>𝖳𝖾𝗋𝗆𝗌 & 𝖢𝗈𝗇𝖽𝗂𝗍𝗂𝗈𝗇𝗌</Text>
         <Text style={{ color: "black", marginHorizontal: 0, opacity: 0.5, fontSize: 10 }}>𝖺𝗇𝖽</Text>
-        <Text style={{ color: "#2fff00", marginHorizontal: 0, opacity: 0.5, fontSize: 10 }}>𝖯𝗋𝗂𝗏𝖺𝖼𝗒 𝖯𝗈𝗂𝗅𝖼𝗒</Text>
+        <Text style={{ color: "#0059ff", marginHorizontal: 0, opacity: 0.5, fontSize: 10 }}>𝖯𝗋𝗂𝗏𝖺𝖼𝗒 𝖯𝗈𝗂𝗅𝖼𝗒</Text>
       </View>
 
       <View style={{ width: "100%", height: height * 0.05, justifyContent: "center", alignItems: "center", marginVertical: 5, paddingHorizontal: 20, backgroundColor: "#00C754", borderRadius: 10 }}>
         <Pressable
+        // disabled
           style={({ pressed }) => [
             {
               width: "100%",
@@ -176,7 +126,10 @@ export default function Signup() {
               transform:[{scale:0.9}]
             }
           ]}
-          onPress={signUp}
+          onPress={() => route.push({
+            pathname:"/OTP",
+            params:{ userData : JSON.stringify(userData) }
+          })}
         >
           <Text style={{ color: "white" }}>𝖲𝗂𝗀𝗇 𝖴𝗉</Text>
         </Pressable>
@@ -187,7 +140,6 @@ export default function Signup() {
         <Text style={{ color: "black", marginHorizontal: 20, opacity: 0.5 }}>𝗈𝗋 𝖼𝗈𝗇𝗍𝗂𝗇𝗎𝖾 𝗐𝗂𝗍𝗁</Text>
         <View style={{ borderWidth: 1, width: "20%", height: "1%", opacity: 0.2 }} />
       </View>
-
 
       <View style={{ width: "100%", justifyContent: "center", alignItems: "center", marginVertical: 5, borderRadius: 10, paddingLeft: 5, display: "flex", flexDirection: "row", gap: 30 }}>
         <View style={{ backgroundColor: "#00000010", padding: 10, borderRadius: 15, display: "flex", flexDirection: "row", gap: 10 }} >
@@ -202,7 +154,6 @@ export default function Signup() {
           </View> : ""
         }
       </View>
-
 
       <View style={{ width: "100%", justifyContent: "center", alignItems: "center", marginVertical: 5, borderRadius: 10, paddingLeft: 5, display: "flex", flexDirection: "row", gap: 3 }}>
         <Text>𝖠𝗅𝗋𝖾𝖺𝖽 𝗁𝖺𝗏𝖾 𝖺𝗇 𝖠𝖼𝖼𝗈𝗎𝗇𝗍 ?</Text><Text
